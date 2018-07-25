@@ -14,15 +14,15 @@ type SinglyLinkedList struct{
 }
 
 func (ll *SinglyLinkedList) insert_data (data int) {
-	n := SinglyLinkedListNode{data,nil}
+	n := &SinglyLinkedListNode{data,nil}
 
 	if ll.head!=nil {
-		ll.tail.next = &n;
+		ll.tail.next = n;
 	}else{
-		ll.head = &n;
+		ll.head = n;
 	}
 
-	ll.tail = &n;
+	ll.tail = n;
 }
 
 func (ll *SinglyLinkedList) insert_node (n *SinglyLinkedListNode) {
@@ -51,6 +51,19 @@ func (ll *SinglyLinkedList) printLL (){
 	}
 }
 
+func (ll *SinglyLinkedList) deleteLL(){
+
+	if ll.head!=nil{
+		for ll.head.next!=nil {
+			t := ll.head.next	
+			ll.head.next = nil
+			ll.head = t
+		}
+		ll.head=nil
+	}
+}
+
+
 func main() {
 	var a =  SinglyLinkedListNode{666,nil}
 
@@ -61,6 +74,8 @@ func main() {
 	ll.insert_node(&a)
 	ll.insert_data(3)
 	ll.insert_data(4)
+	ll.printLL()
+	ll.deleteLL()
 	ll.printLL()
 	
 }
